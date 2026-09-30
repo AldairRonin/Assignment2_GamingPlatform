@@ -32,9 +32,7 @@ Because the client receives only `GamingFactory`, the client does not instantiat
 ## Runtime selection
 The platform can be selected from a command-line argument:
 
-```bash
 mvn -q exec:java -Dexec.mainClass="com.example.assignment2.Main" -Dexec.args="steam"
-```
 
 If the exec plugin is not configured, run `Main` from the IDE and pass `steam`, `epic`, `xbox`, or `playstation` as the first program argument.
 
