@@ -1,0 +1,12 @@
+Run these commits as you progress instead of creating fake history retroactively:
+
+1. git add . && git commit -m "Initial domain model without factories"
+2. git add . && git commit -m "Add product abstractions"
+3. git add . && git commit -m "Introduce Factory Method"
+4. git add . && git commit -m "Add product families"
+5. git add . && git commit -m "Introduce Abstract Factory"
+6. git add . && git commit -m "Add runtime factory selection"
+7. git add . && git commit -m "Add tests and compatibility rules"
+8. git add . && git commit -m "Add fourth product family"
+
+Do not create all eight commits at the same moment if your course requires genuine development history.

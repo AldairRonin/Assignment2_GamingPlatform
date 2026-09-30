@@ -1,0 +1,103 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface GameLauncher
+interface PaymentMethod
+interface NotificationService
+
+class SteamLauncher
+class EpicLauncher
+class XboxLauncher
+class PlayStationLauncher
+
+class SteamPayment
+class EpicPayment
+class XboxPayment
+class PlayStationPayment
+
+class SteamNotification
+class EpicNotification
+class XboxNotification
+class PlayStationNotification
+
+GameLauncher <|.. SteamLauncher
+GameLauncher <|.. EpicLauncher
+GameLauncher <|.. XboxLauncher
+GameLauncher <|.. PlayStationLauncher
+
+PaymentMethod <|.. SteamPayment
+PaymentMethod <|.. EpicPayment
+PaymentMethod <|.. XboxPayment
+PaymentMethod <|.. PlayStationPayment
+
+NotificationService <|.. SteamNotification
+NotificationService <|.. EpicNotification
+NotificationService <|.. XboxNotification
+NotificationService <|.. PlayStationNotification
+
+abstract class LauncherCreator {
+    +createLauncher(): GameLauncher
+    +launchGame(game): String
+}
+class SteamLauncherCreator
+class EpicLauncherCreator
+class XboxLauncherCreator
+class PlayStationLauncherCreator
+
+LauncherCreator <|-- SteamLauncherCreator
+LauncherCreator <|-- EpicLauncherCreator
+LauncherCreator <|-- XboxLauncherCreator
+LauncherCreator <|-- PlayStationLauncherCreator
+
+SteamLauncherCreator ..> SteamLauncher : Factory Method
+EpicLauncherCreator ..> EpicLauncher : Factory Method
+XboxLauncherCreator ..> XboxLauncher : Factory Method
+PlayStationLauncherCreator ..> PlayStationLauncher : Factory Method
+
+interface GamingFactory {
+    +createLauncher(): GameLauncher
+    +createPayment(): PaymentMethod
+    +createNotification(): NotificationService
+    +getFamilyName(): String
+}
+
+class SteamFactory
+class EpicFactory
+class XboxFactory
+class PlayStationFactory
+
+GamingFactory <|.. SteamFactory
+GamingFactory <|.. EpicFactory
+GamingFactory <|.. XboxFactory
+GamingFactory <|.. PlayStationFactory
+
+SteamFactory ..> SteamLauncher
+SteamFactory ..> SteamPayment
+SteamFactory ..> SteamNotification
+
+EpicFactory ..> EpicLauncher
+EpicFactory ..> EpicPayment
+EpicFactory ..> EpicNotification
+
+XboxFactory ..> XboxLauncher
+XboxFactory ..> XboxPayment
+XboxFactory ..> XboxNotification
+
+PlayStationFactory ..> PlayStationLauncher
+PlayStationFactory ..> PlayStationPayment
+PlayStationFactory ..> PlayStationNotification
+
+class GameClient {
+    -factory: GamingFactory
+    +purchaseGame(game, price): String
+    +launchGame(game): String
+    +completePurchaseAndLaunch(game, price): String
+}
+
+GameClient --> GamingFactory : uses abstraction
+
+note "Factory Method" as FM
+note "Abstract Factory" as AF
+LauncherCreator .. FM
+GamingFactory .. AF
+@enduml
